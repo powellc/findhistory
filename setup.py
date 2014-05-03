@@ -12,6 +12,7 @@ install_requires = [
     'dj-database-url==0.3.0',
     'pylibmc==1.3.0',
     'boto==2.9.5',
+    'psycopg2==2.5',
     'django-storages==1.1.8',
     'Pillow==2.0.0',
     'django-cache-url==0.8.0',
