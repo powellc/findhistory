@@ -8,7 +8,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'^accounts/', include('allauth.urls')),
-    url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
     url("^organizations/", include('artifacts.urls')),
     url("^$", 
         TemplateView.as_view(template_name='homepage.html'), 

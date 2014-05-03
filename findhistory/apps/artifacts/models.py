@@ -1,6 +1,6 @@
+from django.conf import settings
 from datetime import datetime
 from django.db import models
-from django.contrib.auth.models import User
 from localflavor.us.models import PhoneNumberField, USStateField
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import permalink
@@ -16,11 +16,10 @@ class StandardMetadata(models.Model):
     Subclass new models from 'StandardMetadata' instead of 'models.Model'.
     """
     title = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True)
     description = models.TextField(blank=True, null=True)
     created = models.DateTimeField(default=datetime.now, editable=False)
     updated = models.DateTimeField(default=datetime.now, editable=False)
-    created_by = models.ForeignKey(User)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     class Meta:
         abstract = True
@@ -85,6 +84,7 @@ class Organization(StandardMetadata, Location):
 
 
 class ArtifactType(StandardMetadata):
+    slug = models.SlugField(unique=True)
 
     @permalink
     def get_absolute_url(self):
@@ -92,6 +92,7 @@ class ArtifactType(StandardMetadata):
 
 
 class Artifact(StandardMetadata):
+    slug = models.SlugField(unique=True)
     organization = models.ForeignKey(Organization, related_name='organization')
     inventory_id = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(max_length=255, upload_to='artifacts')
@@ -119,10 +120,12 @@ class Artifact(StandardMetadata):
 
 
 class TourLocation(StandardMetadata):
+    slug = models.SlugField(unique=True)
     order = models.PositiveIntegerField(default=5)
 
 
 class Tour(StandardMetadata):
+    slug = models.SlugField(unique=True)
     image = models.ImageField(max_length=255, upload_to='tours')
     organization = models.ForeignKey(Organization)
     objects = gis_models.GeoManager()
@@ -136,6 +139,7 @@ class Tour(StandardMetadata):
 
 
 class TourStop(StandardMetadata):
+    slug = models.SlugField(unique=True)
     tour = models.ForeignKey(Tour)
     location = models.ForeignKey(Location)
     artifacts = models.ManyToManyField(Artifact)

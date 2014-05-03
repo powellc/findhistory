@@ -64,6 +64,7 @@ class Common(Configuration):
         "django_extensions",
         'foundation',
         'floppyforms',
+        'south',
         "dajaxice",
 
         "artifacts",
@@ -139,6 +140,10 @@ class Common(Configuration):
     STATIC_URL = '/static/'
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'public/static')
+
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "findhistory/static"),
+    )
 
     #DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
