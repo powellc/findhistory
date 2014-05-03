@@ -1,0 +1,4 @@
+include README.md
+recursive-include findhistory/static *
+recursive-include findhistory/templates *
+recursive-include findhistory/apps *
