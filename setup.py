@@ -26,6 +26,7 @@ install_requires = [
     'django-zurb-foundation==5.1.1',
     'django-dajaxice==0.6',
     'django-custom-user==0.4',
+    'django-localflavor==1.0',
 ]
 
 
