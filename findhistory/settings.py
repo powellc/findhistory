@@ -16,7 +16,7 @@ from configurations import Configuration, values
 class Common(Configuration):
 
     ADMINS = (
-        ('Admin', 'info@example.com'),
+        ('FindHistory Admin', 'info@findhistory.me'),
     )
 
     # You'll likely want to add your own auth model.
@@ -52,7 +52,9 @@ class Common(Configuration):
         "django.contrib.sites",
         "django.contrib.sitemaps",
         "django.contrib.staticfiles",
+        "django.contrib.gis",
 
+        'localflavor',
         'custom_user',
         'allauth',
         'allauth.account',
@@ -62,6 +64,9 @@ class Common(Configuration):
         "django_extensions",
         'foundation',
         'floppyforms',
+        "dajaxice",
+
+        "artifacts",
 
     )
 
@@ -139,7 +144,7 @@ class Common(Configuration):
 
     AWS_ACCESS_KEY_ID = values.Value()
     AWS_SECRET_ACCESS_KEY = values.Value()
-    AWS_STORAGE_BUCKET_NAME = 'example.com'
+    AWS_STORAGE_BUCKET_NAME = 'findhistory'
     AWS_HEADERS = {'ExpiresDefault': 'access plus 30 days',
                    'Cache-Control': 'max-age=86400', }
 
@@ -185,9 +190,8 @@ class Dev(Common):
     """
     DEBUG = TEMPLATE_DEBUG = True
 
-    DATABASES = values.DatabaseURLValue('sqlite:///{0}'.format(
-        os.path.join(Common.BASE_DIR, 'db.sqlite3'),
-        environ=True))
+    DATABASES = values.DatabaseURLValue(
+        'postgis://localhost/fhm')
 
     SECRET_KEY = 'notasecretatall'
 
