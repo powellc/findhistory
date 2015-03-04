@@ -28,8 +28,6 @@ class Common(Configuration):
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     sys.path.insert(0, os.path.join(BASE_DIR, 'findhistory/apps'))
 
-    USE_SOUTH = True
-
     # Quick-start development settings - unsuitable for production
     # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -64,7 +62,6 @@ class Common(Configuration):
         "django_extensions",
         'foundation',
         'floppyforms',
-        'south',
         "dajaxice",
 
         "artifacts",
@@ -196,7 +193,7 @@ class Dev(Common):
     DEBUG = TEMPLATE_DEBUG = True
 
     DATABASES = values.DatabaseURLValue(
-        'postgis://localhost/fhm')
+        'postgis://fhm:mainroot@localhost/fhm')
 
     SECRET_KEY = 'notasecretatall'
 
